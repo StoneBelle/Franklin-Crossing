@@ -11,7 +11,7 @@ screen.tracer(0)
 screen.listen()
 
 #Game Objects & Variables
-franklin = Player()\
+franklin = Player()
 car_manager = CarManager()
 user_sees = Messages()
 

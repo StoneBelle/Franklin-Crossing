@@ -11,7 +11,8 @@ screen.tracer(0)
 screen.listen()
 
 #Game Objects & Variables
-franklin = Player()
+franklin = Player()\
+car_manager = CarManager()
 user_sees = Messages()
 
 #Key Binds
@@ -21,12 +22,13 @@ game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+    car.make_car()
     car.move()
     # TODO: If Franklin reaches end of road, reset his position back to the start, and update level on screen.
     if franklin.ycor() > 280:
         user_sees.level += 1
         franklin.next_lvl()
-        user_sees.update_text()
+        
         car.up_car_spd()
 
     # else:

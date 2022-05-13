@@ -22,20 +22,19 @@ game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
-    car.make_car()
+    car.make_cars()
     car.move()
+    
+    for car in car_manager.cars:
+        if car.distance(franklin) < 20:
+            game_is_on = False
+            user_sees.end_game("Game Over. Franklin got hit by a car.")
+   
     # TODO: If Franklin reaches end of road, reset his position back to the start, and update level on screen.
     if franklin.ycor() > 280:
         user_sees.level += 1
         franklin.next_lvl()
-        
-        car.up_car_spd()
-
-    # else:
-    #     for car in car.cars:
-    #         if car.distance(franklin) < 20:
-    #             game_is_on = False
-    #             user_sees.end_game("Game Over. Franklin got hit by a car.")
+        car_manager.up_car_spd()
 
     # if user_sees.level == 2:
     #     game_is_on = False

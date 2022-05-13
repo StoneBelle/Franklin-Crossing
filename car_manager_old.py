@@ -2,13 +2,12 @@ from turtle import Turtle
 import random
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DISTANCE = 5
-MOVE_INCREMENT = 2
+MOVE_INCREMENT = 3
 
 
 class CarManager:
     def __init__(self):
         self.cars = []
-        self.make_cars()
         self.car_spd = STARTING_MOVE_DISTANCE
 
     def make_cars(self):

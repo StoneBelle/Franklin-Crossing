@@ -1,44 +1,44 @@
 import time
 from turtle import Screen
-from player import Player
+from franklin import Player
 from car_manager import CarManager
-from messages import Messages
+from messages import Message
 
-#Screen SetUp
+# Screen SetUp
 screen = Screen()
 screen.setup(width=600, height=600)
+screen.bgcolor("oldlace")
 screen.tracer(0)
 screen.listen()
 
-#Game Objects & Variables
+# Game Objects
+message = Message()
 franklin = Player()
-car_manager = CarManager()
-user_sees = Messages()
+car = CarManager()
+car.make_cars()
 
-#Key Binds
-screen.onkeypress(franklin.move, "Up")
-
+# TODO 2.1: Control player object with "Up" key.
 game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
-    car.make_cars()
     car.move()
-    
-    for car in car_manager.cars:
-        if car.distance(franklin) < 20:
+
+    # TODO 3: Detect if player comes into collision with car.
+    for zoom in car.cars:
+        if zoom.distance(franklin) < 20:
             game_is_on = False
-            user_sees.end_game("Game Over. Franklin got hit by a car.")
-   
-    # TODO: If Franklin reaches end of road, reset his position back to the start, and update level on screen.
+            message.end_game("GAMEOVER.", "Franklin got hit by a car.")
+
+    # TODO 4.1: If player successfully crosses road, reset their position and update level on screen.
     if franklin.ycor() > 280:
-        user_sees.level += 1
+        message.level += 1
+        message.update_text()
         franklin.next_lvl()
-        car_manager.up_car_spd()
+        car.up_car_spd()
 
-    # if user_sees.level == 2:
-    #     game_is_on = False
-    #     user_sees.end_game("Congrats! You helped Franklin cross the road.")
-    #     # TODO: Detect collision with car.
+    if message.level == 6:
+        game_is_on = False
+        message.end_game("CONGRATS!", "You helped Franklin cross the road.")
 
-screen.mainloop()
+screen.exitonclick()

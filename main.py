@@ -9,7 +9,6 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("oldlace")
 screen.tracer(0)
-screen.listen()
 
 # Game Objects
 message = Message()
@@ -17,6 +16,9 @@ franklin = Player()
 car = CarManager()
 car.make_cars()
 
+# Key Binds
+screen.listen()
+screen.onkeypress(franklin.move, "Up")
 # TODO 2.1: Control player object with "Up" key.
 game_is_on = True
 while game_is_on:
